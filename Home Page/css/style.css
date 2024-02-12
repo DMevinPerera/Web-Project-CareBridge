@@ -1930,7 +1930,7 @@ li.post-comment .comet-avatar {
 
 #searchDir .filterinput {
     border: 1px solid #eaeaea;
-    color: #575757;
+    color: black;
     font-size: 14px;
     padding: 5px 10px;
     width: 100%;
@@ -1939,6 +1939,7 @@ li.post-comment .comet-avatar {
 #searchDir {
     padding: 0 20px;
 }
+
 
 #people-list {
     margin-top: 20px;

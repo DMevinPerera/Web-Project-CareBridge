@@ -7,9 +7,22 @@
   padding: 0px;
   list-style: none; }
 
-img {
-  max-width: 100%; }
-
+  img {
+    max-width: 100%; 
+    margin: 0;
+    height: 100%;
+  }
+  
+  .help{
+   padding-top: 0px;
+   margin-top: 0;
+   margin: 0;
+   padding: 0;
+  }
+  
+  .help img{
+    margin: 0;
+  }
 a {
   text-decoration: none;
   outline: none;
@@ -138,8 +151,10 @@ body {
 
 /* ===================================== Login Page Design CSS ==================================== */
 .form-login-body {
-  background-image: url(../images/bg.jpg);
-  background-size: cover; }
+  background-image: url(../images/bg.png);
+  background-size: cover;
+  height: 100vh;
+}
   @media screen and (max-width: 991px) {
     .form-login-body {
       padding-left: 30px;
@@ -151,16 +166,17 @@ body {
   .form-login-body .login-desk {
     filter: drop-shadow(0 0 13.5px rgba(0, 0, 0, 0.09));
     margin-top: 5%;
-    margin-bottom: 5%; }
+    margin-bottom: 5%;
+  padding: 0; }
     .form-login-body .login-desk .detail-box {
       background-color: #FFF;
-      padding: 20px; }
+      padding: 0px; }
       .form-login-body .login-desk .detail-box .logo {
         width: 130px; }
       .form-login-body .login-desk .detail-box .help {
-        width: 450px;
-        margin-top: 30px;
-        margin-bottom: 50px; }
+        width: 100%;
+        margin-top: 0px;
+        margin-bottom: 0px; }
       .form-login-body .login-desk .detail-box .detailsh {
         text-align: center; }
         .form-login-body .login-desk .detail-box .detailsh h1 {
