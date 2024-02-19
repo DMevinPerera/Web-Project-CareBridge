@@ -572,6 +572,162 @@
 										</div>
 									</div>
 								</div>
+
+								<!--Having the other posts-->
+								<div id="posts-container" class="central-meta"></div>
+
+<script>
+  // Function to fetch and display posts
+  function fetchAndDisplayPosts() {
+    // Use AJAX to fetch data from the server-side API
+    $.ajax({
+      url: 'http://localhost:3000/posts', // The API endpoint
+      method: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        // Generate HTML dynamically based on fetched data
+        const html = data.map(post => `
+          <div class="item">
+            <div class="user-post">
+              <div class="friend-info">
+                <figure>
+                  <img src="../Backend/uploads/${post.media}" alt="">
+                </figure>
+                <div class="friend-name">
+                  <ins><a href="time-line.html" title="">${post.username}</a></ins>
+                  <span>published: ${new Date(post.timestamp).toLocaleString()}</span>
+                </div>
+                <div class="post-meta">
+												<img src="../Backend/uploads/${post.media}" alt="">
+												<div class="we-video-info">
+													<ul>
+														<li>
+															<span class="views" data-toggle="tooltip" title="views">
+																<i class="fa fa-eye"></i>
+																<ins>1.2k</ins>
+															</span>
+														</li>
+														<li>
+															<span class="comment" data-toggle="tooltip" title="Comments">
+																<i class="fa fa-comments-o"></i>
+																<ins>52</ins>
+															</span>
+														</li>
+														<li>
+															<span class="like" data-toggle="tooltip" title="like">
+																<i class="ti-heart"></i>
+																<ins>2.2k</ins>
+															</span>
+														</li>
+														<li>
+															<span class="dislike" data-toggle="tooltip" title="dislike">
+																<i class="ti-heart-broken"></i>
+																<ins>200</ins>
+															</span>
+														</li>
+														<li class="social-media">
+															<div class="menu">
+															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																</div>
+															  </div>
+																<div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																</div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																</div>
+															  </div>
+
+															</div>
+														</li>
+													</ul>
+												</div>
+										
+                  <div class="description">
+                    <p>${post.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        // Insert the generated HTML into the posts-container
+        $('#posts-container').html(html);
+      },
+      error: function (error) {
+        console.error(error);
+      }
+    });
+  }
+
+  // Call the function on page load
+  $(document).ready(function () {
+    fetchAndDisplayPosts();
+  });
+</script>
+									<div class="coment-area">
+											<ul class="we-comet">
+												
+											
+												<li>
+													<a href="#" title="" class="showmore underline">more comments</a>
+												</li>
+												<li class="post-comment">
+													<div class="comet-avatar">
+														<img src="images/resources/comet-1.jpg" alt="">
+													</div>
+													<div class="post-comt-box">
+														<form method="post">
+															<textarea placeholder="Post your comment"></textarea>
+															<div class="add-smiles">
+																<span class="em em-expressionless" title="add icon"></span>
+															</div>
+															<div class="smiles-bunch">
+																<i class="em em---1"></i>
+																<i class="em em-smiley"></i>
+																<i class="em em-anguished"></i>
+																<i class="em em-laughing"></i>
+																<i class="em em-angry"></i>
+																<i class="em em-astonished"></i>
+																<i class="em em-blush"></i>
+																<i class="em em-disappointed"></i>
+																<i class="em em-worried"></i>
+																<i class="em em-kissing_heart"></i>
+																<i class="em em-rage"></i>
+																<i class="em em-stuck_out_tongue"></i>
+															</div>
+															<button type="submit"></button>
+														</form>	
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+
+<!--Ends here ------ Having the other posts-->
+
+
 								</div>
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">

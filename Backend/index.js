@@ -97,6 +97,18 @@ const storage = multer.diskStorage({
     }
   });
   
+  // Fetch posts endpoint
+app.get('/posts', async (req, res) => {
+  try {
+    // Fetch media, description, and timestamp fields from all posts in the database
+    const posts = await Post.find({}, { _id: 0, __v: 0, username: 0 }).sort({ timestamp: -1 });
+
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
