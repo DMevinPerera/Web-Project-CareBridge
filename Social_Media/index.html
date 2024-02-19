@@ -330,32 +330,35 @@
 											<img src="images/resources/admin2.jpg" alt="">
 										</figure>
 										<div class="newpst-input">
-											<form method="post">
-												<textarea rows="2" placeholder="write something"></textarea>
+											<form id="postForm" method="post" onsubmit="uploadPost(); return false;">
+												<textarea id="postDescription" name="description" rows="2" placeholder="Write something"></textarea>
+												<!-- Add other necessary fields such as username -->
+												<input type="hidden" name="username" value="your_username">
+							
 												<div class="attachments">
 													<ul>
 														<li>
 															<i class="fa fa-music"></i>
 															<label class="fileContainer">
-																<input type="file">
+																<input type="file" name="media">
 															</label>
 														</li>
 														<li>
 															<i class="fa fa-image"></i>
 															<label class="fileContainer">
-																<input type="file">
+																<input type="file" name="media">
 															</label>
 														</li>
 														<li>
 															<i class="fa fa-video-camera"></i>
 															<label class="fileContainer">
-																<input type="file">
+																<input type="file" name="media">
 															</label>
 														</li>
 														<li>
 															<i class="fa fa-camera"></i>
 															<label class="fileContainer">
-																<input type="file">
+																<input type="file" name="media">
 															</label>
 														</li>
 														<li>
@@ -366,6 +369,34 @@
 											</form>
 										</div>
 									</div>
+									
+									<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+									<script>
+										function uploadPost() {
+											// Get values from the form
+											var formData = new FormData(document.getElementById("postForm"));
+								
+											// Make the AJAX request to the upload endpoint
+											$.ajax({
+												type: "POST",
+												url: "http://localhost:3000/upload", // Update with your backend endpoint
+												data: formData,
+												contentType: false,
+												processData: false,
+												success: function (response) {
+													// Handle successful upload
+													console.log(response);
+													// Redirect or perform other actions as needed
+												},
+												error: function (error) {
+													// Handle upload failure
+													console.error(error);
+													// Display error message or perform other actions as needed
+												},
+											});
+										}
+									</script>
+								
 								</div><!-- add post new box -->
 								<div class="loadMore">
 								<div class="central-meta item">

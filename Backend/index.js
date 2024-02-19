@@ -4,6 +4,9 @@ const db = require('./db'); // Import the MongoDB connection setup
 const User = require('./models/User'); // Import the User model
 const cors = require('cors');
 const app = express();
+const multer = require('multer');
+const path = require('path');
+const Post = require('./models/posts')
 
 app.use(cors());
 
@@ -59,6 +62,41 @@ app.post('/login', async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error.' });
     }
   });
+
+  // Set up multer storage for handling file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      const fileExtension = path.extname(file.originalname);
+      cb(null, file.fieldname + '-' + uniqueSuffix + fileExtension);
+    },
+  });
+
+  const upload = multer({ storage: storage });
+
+  // Route to upload a post
+  app.post('/upload', upload.single('media'), async (req, res) => {
+    try {
+      const { username, description } = req.body;
+      const mediaType = req.file.mimetype.startsWith('image') ? 'image' : 'video';
+      const media = req.file.filename;
+  
+      // Create a new post
+      const newPost = new Post({ username, description, mediaType, media });
+  
+      // Save the post to the database
+      await newPost.save();
+  
+      res.status(201).json({ message: 'Post uploaded successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+  
 
 // Start the server
 app.listen(port, () => {
