@@ -18,30 +18,53 @@ const users = [];
 
 app.use(bodyParser.json());
 
+
+ // Set up multer storage for handling file uploads
+ const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const fileExtension = path.extname(file.originalname);
+    cb(null, file.fieldname + '-' + uniqueSuffix + fileExtension);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 // Signup endpoint
-app.post('/signup', async (req, res) => {
-    const { email, password } = req.body;
-  
-    try {
+app.post('/signup',upload.single('profilePicture'), async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  try {
       // Check if user already exists
       const existingUser = await User.findOne({ email });
-  
+
       if (existingUser) {
-        return res.status(400).json({ message: 'User with this email already exists.' });
+          return res.status(400).json({ message: 'User with this email already exists.' });
       }
-  
-      // Create a new user
-      const newUser = new User({ email, password });
-  
-      // Save the user to the database
-      await newUser.save();
-  
+      let profilePicture, profile;
+
+      if (req.file && req.file.mimetype && req.file.mimetype.startsWith('image')) {
+        profilePicture = req.file.filename;
+      } else {
+        // Handle the case where no file is uploaded or the uploaded file is not an image
+        profilePicture = null;
+        profile = null;
+      }
+      
+      const newUser = new User({ firstName, lastName, email, password, profilePicture, profile });
+
+    // Save the user to the database
+    await newUser.save();
+
       res.status(201).json({ message: 'Signup successful.', user: newUser });
-    } catch (error) {
+  } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error.' });
-    }
-  });
+  }
+});
 
 // Login endpoint
 app.post('/login', async (req, res) => {
@@ -62,20 +85,6 @@ app.post('/login', async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error.' });
     }
   });
-
-  // Set up multer storage for handling file uploads
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      const fileExtension = path.extname(file.originalname);
-      cb(null, file.fieldname + '-' + uniqueSuffix + fileExtension);
-    },
-  });
-
-  const upload = multer({ storage: storage });
 
   // Route to upload a post
   app.post('/upload', upload.single('media'), async (req, res) => {
@@ -108,6 +117,11 @@ app.get('/posts', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal Server Error' });
 });
 
 // Start the server

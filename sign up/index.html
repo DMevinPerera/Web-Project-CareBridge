@@ -40,9 +40,22 @@
                                                     <i class="far fa-user"></i>
                                                 </span>
                                               </div>
-                                              <input type="text" id="username" class="form-control" placeholder="Enter Username" aria-label="Username" aria-describedby="basic-addon1">
+                                              <input type="text" id="email" class="form-control" placeholder="Enter Email" aria-label="Username" aria-describedby="basic-addon1">
                                          </div>
                                     </div>
+                                    <div class="form-row">
+                                      <label for="">Profile Name</label>
+                                      <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon1">
+                                                  <i class="far fa-user"></i>
+                                              </span>
+                                          </div>
+                                          <input type="text" id="firstName" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon1">
+                                          <input type="text" id="lastName" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1">
+                                      </div>
+                          
+                                 </div>
                                      <div class="form-row">
                                          <label for="">Password</label>
                                              <div class="input-group mb-3">
@@ -55,7 +68,7 @@
                                          </div>
                                     </div>
                                     <div class="form-row">
-                                        <label for="">Password</label>
+                                        <label for="">Re-Enter Password</label>
                                             <div class="input-group mb-3">
                                              <div class="input-group-prepend">
                                                <span class="input-group-text" id="basic-addon1">
@@ -65,10 +78,18 @@
                                              <input type="password" id="password1" class="form-control" placeholder="Enter Password" aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                    </div>
-                                    
+                                   <div class="form-row">
+                                    <label for="profilePicture">Profile Picture</label>
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="profilePicture" name="profilePicture" accept="image/*">
+                                            <label class="custom-file-label" for="profilePicture">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
                                     <br>
                                     
-                                    <button class="btn btn-sm btn-primary">Register</button>
+                                    <button id="signupButton" class="btn btn-sm btn-primary">Register</button>
                                   
                                     
                                     
@@ -83,23 +104,31 @@
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script>
                 $(document).ready(function () {
-                  $("button").click(function () {
+                  $("#signupButton").click(function () {
                     // Get values from the input fields
-                    var username = $("#username").val();
+                    var firstName = $("#firstName").val();
+                    var lastName = $("#lastName").val();
+                    var email = $("#email").val();
                     var password = $("#password").val();
               
-                    // Prepare the data for the AJAX request
-                    var data = {
-                      email: username,
-                      password: password,
-                    };
+                    // Create a FormData object
+                    var formData = new FormData();
+                    formData.append('firstName', firstName);
+                    formData.append('lastName', lastName);
+                    formData.append('email', email);
+                    formData.append('password', password);
+              
+                    // Append the file data
+                    var profilePictureInput = $("#profilePicture")[0];
+                    formData.append('profilePicture', profilePictureInput.files[0]);
               
                     // Make the AJAX request to the signup endpoint
                     $.ajax({
                       type: "POST",
-                      url: "http://localhost:3000/signup", // Update with your backend endpoint
-                      data: JSON.stringify(data),
-                      contentType: "application/json",
+                      url: "http://localhost:3000/signup",
+                      data: formData,
+                      contentType: false,
+                      processData: false,
                       success: function (response) {
                         // Handle successful signup
                         console.log(response);
