@@ -7,6 +7,7 @@ const app = express();
 const multer = require('multer');
 const path = require('path');
 const Post = require('./models/posts')
+const rawBody = require('raw-body');
 
 app.use(cors());
 
@@ -15,6 +16,8 @@ const port = 3000;
 
 // In-memory storage for simplicity
 const users = [];
+
+
 
 app.use(bodyParser.json());
 
@@ -67,25 +70,37 @@ app.post('/signup',upload.single('profilePicture'), async (req, res) => {
 });
 
 // Login endpoint
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-  
-    try {
-      // Find the user in the database
-      const user = await User.findOne({ email });
-  
-      // Check if the user exists and the password matches
-      if (user && user.password === password) {
-        res.json({ message: 'Login successful.', user });
-      } else {
-        res.status(401).json({ message: 'Invalid email or password.' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error.' });
-    }
-  });
+const jwt = require('jsonwebtoken');
 
+app.post('/login', async (req, res) => {
+  const { email: userEmail, password } = req.body;
+
+  try {
+    // Find the user in the database
+    const user = await User.findOne({ email: userEmail });
+
+    // Check if the user exists and the password matches
+    if (user && user.password === password) {
+      // Do not populate in the login route, especially for sensitive information
+      // Instead, only send necessary information and avoid exposing sensitive fields
+      const { firstName, lastName, email, profilePicture } = user;
+
+      // Create a JWT token
+      const token = jwt.sign(
+        { email, firstName, lastName, profilePicture }, // Payload
+        'DW4AZjneTkkeHpN3kKq6TaKXlLyWGq19FHSO6Rm6f8BQNQZKZRyEBYUSvQz3SuS', // Secret key (should be stored in a secure way, not hard-coded)
+        { expiresIn: '1h' } // Token expiration time
+      );
+
+      res.json({ message: 'Login successful.', user: { firstName, lastName, email, profilePicture }, token });
+    } else {
+      res.status(401).json({ message: 'Invalid email or password.' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error.' });
+  }
+});
   // Route to upload a post
   app.post('/upload', upload.single('media'), async (req, res) => {
     try {
@@ -94,10 +109,15 @@ app.post('/login', async (req, res) => {
       const media = req.file.filename;
   
       // Create a new post
+      const user = await User.findOne({ username });
+
       const newPost = new Post({ username, description, mediaType, media });
   
       // Save the post to the database
       await newPost.save();
+
+      user.posts.push(newPost);
+      await user.save();
   
       res.status(201).json({ message: 'Post uploaded successfully' });
     } catch (error) {
@@ -107,22 +127,95 @@ app.post('/login', async (req, res) => {
   });
   
   // Fetch posts endpoint
-app.get('/posts', async (req, res) => {
-  try {
-    // Fetch media, description, and timestamp fields from all posts in the database
-    const posts = await Post.find({}, { _id: 0, __v: 0, username: 0 }).sort({ timestamp: -1 });
+  app.get('/posts', async (req, res) => {
+    try {
+      // Fetch posts with user information
+      const posts = await Post.find({}, { _id: 0, __v: 0 }).sort({ timestamp: -1 }).populate('username', '-_id firstName lastName profilePicture');
+  
+      // Map the posts to include user profile pictures
+      const postsWithProfilePictures = posts.map(post => {
+        const { username, description, mediaType, media, timestamp } = post;
+        const userProfilePicture = username.profilePicture;
+  
+        return {
+          username: {
+            firstName: username.firstName,
+            lastName: username.lastName,
+            profilePicture: userProfilePicture,
+          },
+          description,
+          mediaType,
+          media,
+          timestamp,
+        };
+      });
+  
+      res.json(postsWithProfilePictures);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
 
-    res.json(posts);
+
+
+// Function to verify JWT token
+
+function verifyToken(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, 'DW4AZjneTkkeHpN3kKq6TaKXlLyWGq19FHSO6Rm6f8BQNQZKZRyEBYUSvQz3SuS', (err, decoded) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(decoded);
+      }
+    });
+  });
+}
+
+// Authentication middleware
+async function authenticateMiddleware(req, res, next) {
+  const token = req.headers.authorization.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  try {
+    const decoded = await verifyToken(token);
+    req.user = decoded; // Attach user information to the request object
+    next();
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
-});
+}
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Internal Server Error' });
-});
+  app.get('/getProfilePicture', authenticateMiddleware, async (req, res) => {
+    console.log(req.params);
+    const userEmail = req.user.email; // Assuming you store user information in the request object after authentication
+    
+    try {
+      const user = await User.findOne({ email: userEmail });
+      
+      if (user) {
+        res.json({
+          profilePicture: user.profilePicture,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        });
+      } else {
+        res.json({
+          profilePicture: null,
+          firstName: 'Default',
+          lastName: 'User',
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
 
 // Start the server
 app.listen(port, () => {

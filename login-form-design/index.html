@@ -77,13 +77,13 @@
                         // Get values from the input fields
                         var username = $("#username").val();
                         var password = $("#password").val();
-        
+            
                         // Prepare the data for the AJAX request
                         var data = {
                             email: username,
                             password: password
                         };
-        
+            
                         // Make the AJAX request to the login endpoint
                         $.ajax({
                             type: "POST",
@@ -93,8 +93,23 @@
                             success: function (response) {
                                 // Handle successful login
                                 console.log(response);
-                                window.location.href = "../Social_Media/index.html";
+            
+                                // Capture the token from the server's response
+                                var token = response.token;
+            
+                                // Include the token in the headers of subsequent requests
+                                $.ajaxSetup({
+                                    headers: {
+                                        'Authorization': `Bearer ${token}`
+                                    }
+                                });
+            
+                                // Update the user's profile picture dynamically
+                                var userProfilePicture = response.user.profilePicture || 'images/resources/admin.jpg';
+                                $("#profilePicture").attr('src', userProfilePicture);
+            
                                 // Redirect or perform other actions as needed
+                                window.location.href = "../Social_Media/index.html";
                             },
                             error: function (error) {
                                 // Handle login failure
