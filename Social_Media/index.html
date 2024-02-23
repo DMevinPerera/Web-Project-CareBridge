@@ -235,11 +235,11 @@
 				  .then(response => response.json())
 				  .then(data => {
 					// Assuming the API response contains a 'profilePicturePath' field
-					const profilePicturePath = data.profilePicturePath;
+					const profilePicturePath = data.profilePicture;
 			  
 					// Set the profile picture src attribute
 					const fullPath = '../Backend/uploads/' + profilePicturePath;
-
+					console.log('fullPath',data);
     // Set the profile picture src attribute
     document.getElementById('profilePicture').src = fullPath;
 				  })

@@ -96,6 +96,7 @@
             
                                 // Capture the token from the server's response
                                 var token = response.token;
+                                localStorage.setItem("token",token)
             
                                 // Include the token in the headers of subsequent requests
                                 $.ajaxSetup({
@@ -109,7 +110,7 @@
                                 $("#profilePicture").attr('src', userProfilePicture);
             
                                 // Redirect or perform other actions as needed
-                                window.location.href = "../Social_Media/index.html";
+                               window.location.href = "../Social_Media/index.html";
                             },
                             error: function (error) {
                                 // Handle login failure
