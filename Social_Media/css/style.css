@@ -666,6 +666,24 @@ header.sticky {
     vertical-align: inherit;
 }
 
+.top-area .profilePicture{
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    line-height: 60px;
+}
+.top-area .profilePicture{
+    border-radius: 50%;
+    display: inline-block;
+    transform: scale(0.7);
+    vertical-align: inherit;
+}
+
+.profilePicture > span.status{
+    bottom: 10px;
+    right: 5px;
+}
 
 
 .top-area .user-img > img {
