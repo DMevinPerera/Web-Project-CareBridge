@@ -101,6 +101,101 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error.' });
   }
 });
+
+
+app.post('/login', async (req, res) => {
+  const { email: userEmail, password } = req.body;
+
+  try {
+    // Find the user in the database
+    const user = await User.findOne({ email: userEmail });
+
+    // Check if the user exists and the password matches
+    if (user && user.password === password) {
+      // Do not populate in the login route, especially for sensitive information
+      // Instead, only send necessary information and avoid exposing sensitive fields
+      const { firstName, lastName, email, profilePicture } = user;
+
+      // Create a JWT token
+      const token = jwt.sign(
+        { email, firstName, lastName, profilePicture }, // Payload
+        'DW4AZjneTkkeHpN3kKq6TaKXlLyWGq19FHSO6Rm6f8BQNQZKZRyEBYUSvQz3SuS', // Secret key (should be stored in a secure way, not hard-coded)
+        { expiresIn: '1h' } // Token expiration time
+      );
+
+      res.json({ message: 'Login successful.', user: { firstName, lastName, email, profilePicture }, token });
+    } else {
+      res.status(401).json({ message: 'Invalid email or password.' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error.' });
+  }
+});
+
+
+  // Route to upload a post
+
+  function parseJWT (token) {
+    return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+}
+
+
+  app.post('/upload', upload.single('media'), async (req, res) => {
+
+    try {
+      // Check if authorization header is present
+      if (!req.headers.authorization) {
+          return res.status(401).json({ message: 'Authorization header is missing' });
+      }
+
+      // Split the authorization header and get the token
+      const authorizationHeader = req.headers.authorization;
+      const token = authorizationHeader.split(' ')[1];
+
+      // Check if token is present
+      if (!token) {
+          return res.status(401).json({ message: 'Token is missing in the authorization header' });
+      }
+
+
+      const { description } = req.body;
+
+      const decodedToken = parseJWT(req.headers.authorization.split(' ')[1]);
+      console.log('Decoded Token:', decodedToken);
+      const username = `${decodedToken.firstName}${decodedToken.lastName}`;
+      console.log('Decoded username:', username);
+      const user = await User.findOne({ username });
+
+      const mediaType = req.file.mimetype.startsWith('image') ? 'image' : 'video';
+      const media = req.file.filename;
+  
+      // Create a new post
+
+      const newPost = new Post({ username, description, mediaType, media });
+  
+      // Save the post to the database
+      await newPost.save();
+
+    //  user.posts.push(newPost);
+   //   await user.save();
+  
+      res.status(201).json({ message: 'Post uploaded successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+
+
+
+
+
+
+/*
+
+
   // Route to upload a post
   app.post('/upload', upload.single('media'), async (req, res) => {
     try {
@@ -125,6 +220,13 @@ app.post('/login', async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   });
+
+
+
+*/
+
+
+
   
   // Fetch posts endpoint
   app.get('/posts', async (req, res) => {
@@ -138,11 +240,7 @@ app.post('/login', async (req, res) => {
         const userProfilePicture = username.profilePicture;
   
         return {
-          username: {
-            firstName: username.firstName,
-            lastName: username.lastName,
-            profilePicture: userProfilePicture,
-          },
+          username,
           description,
           mediaType,
           media,
