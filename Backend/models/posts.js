@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
+    profilePicture: { type: String, required: true },
     username: { type: String, required: true },
     description: { type: String, required: true },
     media: { type: String, required: true },

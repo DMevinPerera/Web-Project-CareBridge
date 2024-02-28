@@ -166,13 +166,14 @@ app.post('/login', async (req, res) => {
       const username = `${decodedToken.firstName}${decodedToken.lastName}`;
       console.log('Decoded username:', username);
       const user = await User.findOne({ username });
+      const profilePicture = `${decodedToken.profilePicture}`;
 
       const mediaType = req.file.mimetype.startsWith('image') ? 'image' : 'video';
       const media = req.file.filename;
   
       // Create a new post
 
-      const newPost = new Post({ username, description, mediaType, media });
+      const newPost = new Post({ profilePicture, username, description, mediaType, media });
   
       // Save the post to the database
       await newPost.save();
@@ -236,10 +237,11 @@ app.post('/login', async (req, res) => {
   
       // Map the posts to include user profile pictures
       const postsWithProfilePictures = posts.map(post => {
-        const { username, description, mediaType, media, timestamp } = post;
+        const { profilePicture, username, description, mediaType, media, timestamp } = post;
         const userProfilePicture = username.profilePicture;
   
         return {
+          profilePicture,
           username,
           description,
           mediaType,
