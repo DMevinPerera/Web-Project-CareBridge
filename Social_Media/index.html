@@ -55,10 +55,20 @@
 		</div>
 		
 		<div class="top-area">
+			<style>
+				.main-menu a i {
+				  color: rgb(189, 189, 189); /* Set the default color for the icons */
+				  transition: color 0.3s; /* Add a smooth transition effect */
+				}
+				
+				.main-menu a:hover i {
+				  color: rgb(55, 55, 255); /* Change the color to blue on hover */
+				}
+				</style>
 			<ul class="main-menu">
-				<a href="#"><i class="fas fa-home"></i></a>
+				<a href="/Home Page/Home.html"><i class="fas fa-home"></i></a>
       			<a href="#"><i class="fas fa-rss"></i></a>
-      			<a href="#"><i class="fas fa-video"></i></a>
+      			<a href="/Realtimevideo/index.html"><i class="fas fa-video"></i></a>
       			<a href="#"><i class="fas fa-user-md"></i></a>
 			</ul>
 				<form method="post" class="form-search">
@@ -241,7 +251,10 @@
 					const fullPath = '../Backend/uploads/' + profilePicturePath;
 					console.log('fullPath',data);
     // Set the profile picture src attribute
-    document.getElementById('profilePicture').src = fullPath;
+	const profilePictures = document.getElementsByClassName('profilePicture');
+            for (const picture of profilePictures) {
+                picture.src = fullPath;
+            }
 				  })
 				  .catch(error => {
 					console.error('Error fetching profile picture:', error);
@@ -389,8 +402,14 @@
 								<div class="central-meta">
 									<div class="new-postbox">
 										<figure>
-											<img src="images/resources/admin2.jpg" alt="">
+											<img src="images/resources/admin.jpg" id="profilePicture" class="profilePicture" width="50px" alt="">
 										</figure>
+										
+
+
+
+
+										
 										<div class="newpst-input">
 											<form id="postForm" method="post" onsubmit="uploadPost(); return false;">
 												<textarea id="postDescription" name="description" rows="2" placeholder="Write something"></textarea>
@@ -679,30 +698,14 @@
 												<img src="../Backend/uploads/${post.media}" alt="">
 												<div class="we-video-info">
 													<ul>
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
+											
 														<li>
 															<span class="like" data-toggle="tooltip" title="like">
 																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
+																<ins>${post.likes}</ins>
 															</span>
 														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
+														
 														<li class="social-media">
 															<div class="menu">
 															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
@@ -757,50 +760,28 @@
     });
   }
 
+  function likePost(_id) {
+    $.ajax({
+      url: `http://localhost:3000/like/${_id}`,
+      method: 'POST',
+      success: function (response) {
+        // Update the like count in the UI
+		const likeElement = $(`span.like[onclick="likePost('${_id}')"]`);
+      const currentLikes = parseInt(likeElement.find('ins').text());
+      likeElement.find('ins').text(currentLikes + 1);
+      },
+      error: function (error) {
+        console.error(error);
+      }
+    });
+  }
+
   // Call the function on page load
   $(document).ready(function () {
     fetchAndDisplayPosts();
   });
 </script>
-									<div class="coment-area">
-											<ul class="we-comet">
-												
-											
-												<li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>
-												<li class="post-comment">
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="post-comt-box">
-														<form method="post">
-															<textarea placeholder="Post your comment"></textarea>
-															<div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
-															<div class="smiles-bunch">
-																<i class="em em---1"></i>
-																<i class="em em-smiley"></i>
-																<i class="em em-anguished"></i>
-																<i class="em em-laughing"></i>
-																<i class="em em-angry"></i>
-																<i class="em em-astonished"></i>
-																<i class="em em-blush"></i>
-																<i class="em em-disappointed"></i>
-																<i class="em em-worried"></i>
-																<i class="em em-kissing_heart"></i>
-																<i class="em em-rage"></i>
-																<i class="em em-stuck_out_tongue"></i>
-															</div>
-															<button type="submit"></button>
-														</form>	
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+									
 
 
 <!--Ends here ------ Having the other posts-->

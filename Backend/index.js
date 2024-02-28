@@ -173,7 +173,8 @@ app.post('/login', async (req, res) => {
   
       // Create a new post
 
-      const newPost = new Post({ profilePicture, username, description, mediaType, media });
+      const newPost = new Post({ profilePicture, username, description, mediaType, media, likes: 0 });
+      
   
       // Save the post to the database
       await newPost.save();
@@ -189,7 +190,31 @@ app.post('/login', async (req, res) => {
   });
 
 
+  app.post('/like/:_id', async (req, res) => {
+    try {
+        const postId = req.params._id;
+        console.log('Received like request for post with ID:', postId);
 
+        // Find the post by ID
+        const post = await Post.findById(postId);
+
+        // Check if the post exists
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        // Increment the like count
+        post.likes++;
+
+        // Save the updated post
+        await post.save();
+
+        res.json({ likes: post.likes });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 
 
 
@@ -237,10 +262,11 @@ app.post('/login', async (req, res) => {
   
       // Map the posts to include user profile pictures
       const postsWithProfilePictures = posts.map(post => {
-        const { profilePicture, username, description, mediaType, media, timestamp } = post;
+        const { likes, profilePicture, username, description, mediaType, media, timestamp } = post;
         const userProfilePicture = username.profilePicture;
   
         return {
+          likes,
           profilePicture,
           username,
           description,

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>CareBridge</title>
+    
+    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
+
+	<style>
+		.friend-name{
+			font-family: 'Arial', sans-serif;
+   			 font-size: 1.5em;
+    	color: #333;
+    	border-bottom: 2px solid #0066cc;
+    	padding-bottom: 5px;
+    	margin-bottom: 10px;
+		}
+
+
+		.video-wrapper{
+			margin-bottom: 50px;
+		}
+	</style>
+
+	<script src="youtube.js" defer></script>
+
+
+
+
+
+</head>
+<body>
+	
+<!--<div class="se-pre-con"></div>-->
+<div class="theme-layout">
+	
+	<div class="responsive-header">
+		<div class="mh-head first Sticky">
+			<span class="mh-btns-left">
+				<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+			</span>
+			<span class="mh-text">
+				<a href="newsfeed.html" title=""><img src="images/logo2.png" alt=""></a>
+			</span>
+			<span class="mh-btns-right">
+				<a class="fa fa-sliders" href="#shoppingbag"></a>
+			</span>
+		</div>
+		<div class="mh-head second">
+			<form class="mh-form">
+				<input placeholder="search" />
+				<a href="#/" class="fa fa-search"></a>
+			</form>
+		</div>
+
+		<nav id="shoppingbag">
+			<div>
+				<div class="">
+
+					<h4 class="panel-title">Account Setting</h4>
+					
+				</div>
+			</div>
+		</nav>
+	</div><!-- responsive header -->
+	
+	<div class="topbar stick">
+		<div class="logo">
+			<a title="" href="newsfeed.html"><img src="images/CareBridge_black.png" alt=""></a>
+		</div>
+		
+		<div class="top-area">
+			<style>
+				.main-menu a i {
+				  color: rgb(189, 189, 189); /* Set the default color for the icons */
+				  transition: color 0.3s; /* Add a smooth transition effect */
+				}
+				
+				.main-menu a:hover i {
+				  color: rgb(55, 55, 255); /* Change the color to blue on hover */
+				}
+				</style>
+			<ul class="main-menu">
+				<a href="/Home Page/Home.html"><i class="fas fa-home"></i></a>
+      			<a href="/Social_Media/index.html"><i class="fas fa-rss"></i></a>
+      			<a href="/Realtimevideo/index.html"><i class="fas fa-video"></i></a>
+      			<a href="#"><i class="fas fa-user-md"></i></a>
+			</ul>
+				<form method="post" class="form-search">
+					<a href="#"><i class="fas fa-search" style="color: #f1b864; "></i></a>
+					<input type="text" class="searchtext" placeholder="Search" style="width: 120px;">
+				</form>
+			<ul class="setting-area">
+				<li>
+					<a href="#" title="Notification" data-ripple="">
+						<i class="ti-bell"></i><span>20</span>
+					</a>
+					<div class="dropdowns">
+						<span>4 New Notifications</span>
+						<ul class="drops-menu">
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-1.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>sarah Loren</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag green">New</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-2.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Jhon doe</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag red">Reply</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-3.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Andrew</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag blue">Unseen</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-4.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Tom cruse</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag">New</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-5.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Amy</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag">New</span>
+							</li>
+						</ul>
+						<a href="notifications.html" title="" class="more-mesg">view more</a>
+					</div>
+				</li>
+				<li>
+					<a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
+					<div class="dropdowns">
+						<span>5 New Messages</span>
+						<ul class="drops-menu">
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-1.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>sarah Loren</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag green">New</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-2.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Jhon doe</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag red">Reply</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-3.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Andrew</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag blue">Unseen</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-4.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Tom cruse</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag">New</span>
+							</li>
+							<li>
+								<a href="notifications.html" title="">
+									<img src="images/resources/thumb-5.jpg" alt="">
+									<div class="mesg-meta">
+										<h6>Amy</h6>
+										<span>Hi, how r u dear ...?</span>
+										<i>2 min ago</i>
+									</div>
+								</a>
+								<span class="tag">New</span>
+							</li>
+						</ul>
+						<a href="messages.html" title="" class="more-mesg">view more</a>
+					</div>
+				</li>
+			</ul>
+			<div class="user-img">
+				<img src="images/resources/admin.jpg" id="profilePicture" class="profilePicture" width="50px" alt="">
+				<span class="status f-online"></span>
+				<div class="user-setting">
+					<a href="#" title=""><span class="status f-online"></span>online</a>
+					<a href="#" title=""><span class="status f-away"></span>away</a>
+					<a href="#" title=""><span class="status f-off"></span>offline</a>
+					<a href="#" title=""><i class="ti-user"></i> view profile</a>
+					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
+					<a href="#" title=""><i class="ti-target"></i>activity log</a>
+					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
+					<a href="/login-form-design/index.html" title=""><i class="ti-power-off"></i>log out</a>
+				</div>
+			</div>
+			<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+			<script>
+				// Function to fetch user profile picture using the token
+				function fetchProfilePicture() {
+					const token = localStorage.getItem('token');
+					console.log('Token:', token);
+					
+				  // Replace with your actual API endpoint
+				  const apiEndpoint = 'http://localhost:3000/getProfilePicture';
+			
+					console.log('Token:', token);
+			  
+				  // Fetch user profile picture path using the API
+				  fetch(apiEndpoint, {
+					method: 'GET',
+					headers: {
+					  'Authorization': `Bearer ${token}`
+					  // Add other headers as needed
+					}
+				  })
+				  .then(response => response.json())
+				  .then(data => {
+					// Assuming the API response contains a 'profilePicturePath' field
+					const profilePicturePath = data.profilePicture;
+			  
+					// Set the profile picture src attribute
+					const fullPath = '../Backend/uploads/' + profilePicturePath;
+					console.log('fullPath',data);
+    // Set the profile picture src attribute
+	const profilePictures = document.getElementsByClassName('profilePicture');
+            for (const picture of profilePictures) {
+                picture.src = fullPath;
+            }
+				  })
+				  .catch(error => {
+					console.error('Error fetching profile picture:', error);
+				  });
+				}
+			  
+				// Assuming you have a function to fetch the token during login
+				function fetchToken() {
+				  // Replace with your actual login API endpoint
+				  const loginEndpoint = 'http://localhost:3000/login';
+			  
+				  // Make a request to the login API to get the token
+				  fetch(loginEndpoint, {
+					method: 'POST',
+					// Add necessary headers and body parameters for login
+				  })
+				  .then(response => response.json())
+				  .then(data => {
+					const token = data.token;
+			  
+					// Call the function to fetch the profile picture using the token
+					fetchProfilePicture(token);
+				  })
+				  .catch(error => {
+					console.error('Error fetching token:', error);
+				  });
+				}
+			  
+				// Call the function to fetch the token during page load or when needed
+				fetchToken();
+			  </script>
+			
+		</div>
+	</div><!-- topbar -->
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Shortcuts</h4>
+										<ul class="naves">
+										
+											<li>
+												<i class="ti-mouse-alt"></i>
+												<a href="inbox.html" title="">Inbox</a>
+											</li>
+											
+											<li>
+												<i class="ti-user"></i>
+												<a href="timeline-friends.html" title="">friends</a>
+											</li>
+											
+											
+											<li>
+												<i class="ti-comments-smiley"></i>
+												<a href="messages.html" title="">Messages</a>
+											</li>
+											<li>
+												<i class="ti-bell"></i>
+												<a href="notifications.html" title="">Notifications</a>
+											</li>
+											<li>
+												<i class="fa fa-bar-chart-o"></i>
+												<a href="insights.html" title="">insights</a>
+											</li>
+											<li>
+												<i class="ti-power-off"></i>
+												<a href="/login-form-design/index.html" title="">Logout</a>
+											</li>
+										</ul>
+									</div><!-- Shortcuts -->
+									<div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="time-line.html">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div><!-- recent activites -->
+									<div class="widget stick-widget">
+										<h4 class="widget-title">Who's follownig</h4>
+										<ul class="followers">
+											<li>
+												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Issabel</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Andrew</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Sophia</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Allen</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+										</ul>
+									</div><!-- who's following -->
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<!-- add post new box -->
+								<div class="loadMore">
+								<div class="central-meta item">
+									<div class="user-post">
+									
+										
+										
+									</div>
+								</div>
+
+							
+									
+
+
+<!--Ends here ------ Having the other posts-->
+
+
+								</div>
+							</div><!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<!-- page like widget -->
+									
+									<div class="widget friend-list stick-widget">
+										<h4 class="widget-title">Friends</h4>
+										<div class="seachbar" style="padding: 0 20px; padding-left: 0; margin-left: 0;">
+										<div id="searchDir"></div>
+										</div>
+										<ul id="people-list" class="friendz-list">
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">bucky barnes</a>
+													
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar3.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">jason borne</a>
+													
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar4.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Cameron diaz</a>
+													
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar6.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">andrew</a>
+													
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar7.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">amy watson</a>
+													
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													
+												</div>
+											</li>
+										</ul>
+										<div class="chat-box">
+											<div class="chat-head">
+												<span class="status f-online"></span>
+												<h6>Bucky Barnes</h6>
+												<div class="more">
+													<span><i class="ti-more-alt"></i></span>
+													<span class="close-mesage"><i class="ti-close"></i></span>
+												</div>
+											</div>
+											<div class="chat-list">
+												<ul>
+													<li class="me">
+														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="you">
+														<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="me">
+														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+												</ul>
+												<form class="text-box">
+													<textarea placeholder="Post enter to post..."></textarea>
+													<div class="add-smiles">
+														<span title="add icon" class="em em-expressionless"></span>
+													</div>
+													<div class="smiles-bunch">
+														<i class="em em---1"></i>
+														<i class="em em-smiley"></i>
+														<i class="em em-anguished"></i>
+														<i class="em em-laughing"></i>
+														<i class="em em-angry"></i>
+														<i class="em em-astonished"></i>
+														<i class="em em-blush"></i>
+														<i class="em em-disappointed"></i>
+														<i class="em em-worried"></i>
+														<i class="em em-kissing_heart"></i>
+														<i class="em em-rage"></i>
+														<i class="em em-stuck_out_tongue"></i>
+													</div>
+													<button type="submit"></button>
+												</form>
+											</div>
+										</div>
+									</div><!-- friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4">
+					<div class="widget">
+						<div class="foot-logo">
+							<div class="logo">
+								<a href="index-2.html" title=""><img src="images/CareBridge_black.png" alt=""></a>
+							</div>	
+							<p>
+								Join the worlds largest community of Cancer Patients in the World.
+							</p>
+						</div>
+						<ul class="location">
+							<li>
+								<i class="ti-map-alt"></i>
+								<p>Sabaragamuwa University of Sri Lanka</p>
+							</li>
+							<li>
+								<i class="ti-mobile"></i>
+								<p>+94 112 54687</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-4">
+					<div class="widget">
+						<div class="widget-title"><h4>follow</h4></div>
+						<ul class="list-style">
+							<li><i class="fa fa-facebook-square"></i> <a href="https://web.facebook.com/shopcircut/" title="">facebook</a></li>
+							<li><i class="fa fa-twitter-square"></i><a href="https://twitter.com/login?lang=en" title="">twitter</a></li>
+							<li><i class="fa fa-instagram"></i><a href="https://www.instagram.com/?hl=en" title="">instagram</a></li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-4">
+					<div class="widget">
+						<div class="widget-title"><h4>Navigate</h4></div>
+						<ul class="list-style">
+							<li><a href="about.html" title="">about us</a></li>
+							<li><a href="contact.html" title="">contact us</a></li>
+							<li><a href="terms.html" title="">terms & Conditions</a></li>
+						
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-4">
+				</div>
+				<div class="col-lg-2 col-md-4">
+					<div class="widget">
+						<div class="widget-title"><h4>download apps</h4></div>
+						<ul class="colla-apps">
+							<li><a href="https://play.google.com/store?hl=en" title=""><i class="fa fa-android"></i>android</a></li>
+							<li><a href="https://www.apple.com/lae/ios/app-store/" title=""><i class="ti-apple"></i>iPhone</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!-- footer -->
+	<div class="bottombar">
+		<div class="container">
+			<div class="row">
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- side panel -->		
+	
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/map-init.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
+
+</body>	
+
+</html>
