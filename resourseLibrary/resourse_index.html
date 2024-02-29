@@ -173,10 +173,13 @@
 								<div class="col-lg-4 col-sm-6">
 									<div class="row" id="Library"></div>
 									<script>
+										const blogId = '9190905892112183495';
+const apiKey = 'AIzaSyBSAHGIzn_IHOPwIFTtE0zbY9HSmwg1olY';
+const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}`;
 										  function stripHtmlTags(html) {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        return doc.body.textContent || "";
-    }
+       						 const doc = new DOMParser().parseFromString(html, 'text/html');
+       	 					return doc.body.textContent || "";
+    						}
 
     // Function to format the date
     function formatDate(dateString) {
@@ -184,9 +187,7 @@
     }
 
 
-										const blogId = '9190905892112183495';
-										const apiKey = 'AIzaSyBSAHGIzn_IHOPwIFTtE0zbY9HSmwg1olY';
-										const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}`;
+									
 	
 	// Function to fetch and display blog posts
 	function createReadMoreLink(post) {
