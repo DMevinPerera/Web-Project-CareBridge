@@ -78,7 +78,7 @@ body, h1, p {
 }
 
 .top-area > ul > li > a {
-    color: #999;
+    color: #ffffff;
 }
 
 .top-area .user-img {
@@ -129,7 +129,7 @@ body, h1, p {
 .form-search input {
     border-style: none none solid;
     border-width: medium medium 1px;
-    color: #999999;
+    color: #ffffff;
     font-size: 15px;
     padding: 9px 18px;
     width: 100%;
@@ -138,7 +138,7 @@ body, h1, p {
 .form-search button {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
-    color: #999;
+    color: #ffffff;
     position: absolute;
     right: 5px;
     top: 9px;
@@ -179,7 +179,7 @@ body, h1, p {
   }
   
   nav a {
-    color: rgb(87, 87, 87);
+    color: rgb(255, 255, 255);
     margin: 0 10px;
     text-decoration: none; /* Remove underline from links */
     padding-right: 10px;
@@ -208,7 +208,7 @@ body, h1, p {
   
   i.fa-search {
     font-size: 1.5em;
-    color: #F1B846;
+    color: #00a6d0;
   }
   
   .right {
@@ -302,6 +302,7 @@ body, h1, p {
 
   .rounded-button:hover {
     background-color: #0056b3;
+    color: white;
   }
 
   .section2{
@@ -387,7 +388,7 @@ body, h1, p {
   }
   .fas{
       font-size: 1.5em;
-      color: #ccc;
+      color: #ffffff;
   }
   
   .content {

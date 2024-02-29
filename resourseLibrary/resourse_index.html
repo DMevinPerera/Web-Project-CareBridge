@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-	<title>Winku Social Network Toolkit</title>
+	<title>CareBridge</title>
     <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
     
     <link rel="stylesheet" href="css/main.min.css">
@@ -81,7 +81,7 @@
 	
 	<div class="topbar transparent">
 		<div class="logo">
-			<a title="" href="newsfeed.html"><img src="images/CareBridge.png" alt=""></a>
+			<a title="" href="/Home Page/Home.html"><img src="images/CareBridge.png" alt=""></a>
 		</div>
 		<div class="menu-container" id="toggle">
 		  <a href="#" class="canvas-menu" >
@@ -168,10 +168,14 @@
 									<a href="#" title="">purify</a>
 								</div>
 							</div>
-							<div class="row">
+						
 								
-								<div class="col-lg-4 col-sm-6">
-									<div class="row" id="Library"></div>
+								<div class="col-sm-12">
+									<div id="Library"></div>
+
+
+
+
 									<script>
 										const blogId = '9190905892112183495';
 const apiKey = 'AIzaSyBSAHGIzn_IHOPwIFTtE0zbY9HSmwg1olY';
@@ -190,13 +194,40 @@ const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=
 									
 	
 	// Function to fetch and display blog posts
-	function createReadMoreLink(post) {
-        const readMoreLink = document.createElement('a');
-        readMoreLink.href = post.url;
-        readMoreLink.innerText = 'Read More';
-        return readMoreLink;
-    }
+	function createReadMoreLink(post, content) {
+    const readMoreLink = document.createElement('a');
+    readMoreLink.href = post.url;
+    readMoreLink.innerText = 'Read More';
+    readMoreLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        content.innerText = stripHtmlTags(post.content);
+        postMeta.removeChild(readMoreLink);
+        postMeta.appendChild(createShowLessLink(post, content, readMoreLink));
+    });
+    return readMoreLink;
+}
 
+function createShowLessLink(post, content, readMoreLink) {
+    const showLessLink = document.createElement('a');
+    showLessLink.href = post.url;
+    showLessLink.innerText = 'Show Less';
+    showLessLink.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        // Truncate the content to the desired length
+        const truncatedContent = stripHtmlTags(post.content).substring(0, 150);
+        
+        // Update the content with truncated version
+        content.innerText = truncatedContent;
+
+        // Remove the "Show Less" link and add the "Read More" link
+        postMeta.removeChild(showLessLink);
+        postMeta.appendChild(readMoreLink);
+    });
+    return showLessLink;
+}
+
+	
     // Function to fetch and display blog posts
     async function fetchAndDisplayBlogPosts() {
         try {
@@ -247,7 +278,8 @@ const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=
                 p.innerText = truncatedContent;
 
                 // Create "Read More" link
-                const readMoreLink = createReadMoreLink(post);
+				const readMoreLink = createReadMoreLink(post, p);
+	
 
                 // Handle "Read More" click event
                 readMoreLink.addEventListener('click', (event) => {
@@ -255,6 +287,9 @@ const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=
                     p.innerText = strippedContent;
                     postMeta.removeChild(readMoreLink);
                 });
+
+				
+				
 
                 // Append elements to the structure
                 postContainer.appendChild(figure);
@@ -349,16 +384,7 @@ const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=
 			</div>
 		</div>
 	</footer><!-- footer -->
-	<div class="bottombar">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
-					<i><img src="images/credit-cards.png" alt=""></i>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 </div>	
 	
 	<script src="js/main.min.js"></script>
