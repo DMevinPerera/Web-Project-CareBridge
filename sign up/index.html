@@ -24,7 +24,7 @@
                             <div class="col-md-7 detail-box">
                                  
                                 <div class="detailsh">
-                                     <img class="help" src="assets/images/loginvector.png" alt="">
+                                     <img class="help h-100"  src="assets/images/loginvector.png" alt="">
                                    
                                 </div>
                             </div>
@@ -56,6 +56,18 @@
                                       </div>
                           
                                  </div>
+                                 <div class="form-row">
+                                  <label for="userType">User Type</label>
+                                  <select id="userType"  class="form-control" onchange="toggleQualificationsField()">
+                                      <option value="patient">Patient</option>
+                                      <option value="doctor">Doctor</option>
+                                  </select>
+                              </div>
+                              
+                              <div class="form-row" id="qualificationsField" style="display: none;">
+                                  <label for="qualifications">Qualifications</label>
+                                  <input type="text" id="qualifications" class="form-control" placeholder="Enter Qualifications">
+                              </div>
                                      <div class="form-row">
                                          <label for="">Password</label>
                                              <div class="input-group mb-3">
@@ -110,6 +122,10 @@
                     var lastName = $("#lastName").val();
                     var email = $("#email").val();
                     var password = $("#password").val();
+                    var userType = $("#userType").val(); // Get user type
+                    var qualifications = $("#qualifications").val(); // Get qualifications
+
+                    
               
                     // Create a FormData object
                     var formData = new FormData();
@@ -117,6 +133,8 @@
                     formData.append('lastName', lastName);
                     formData.append('email', email);
                     formData.append('password', password);
+                    formData.append('userType', userType); // Append user type
+                    formData.append('qualifications', qualifications); // Append qualifications
               
                     // Append the file data
                     var profilePictureInput = $("#profilePicture")[0];
@@ -145,6 +163,18 @@
                   });
                 });
               </script>
+              <script>
+                function toggleQualificationsField() {
+                    var userType = document.getElementById('userType').value;
+                    var qualificationsField = document.getElementById('qualificationsField');
+            
+                    if (userType === 'doctor') {
+                        qualificationsField.style.display = 'block';
+                    } else {
+                        qualificationsField.style.display = 'none';
+                    }
+                }
+            </script>
     </body>
 
     <script src="assets/js/jquery-3.2.1.min.js"></script>

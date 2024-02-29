@@ -67,13 +67,13 @@
 				</style>
 			<ul class="main-menu">
 				<a href="/Home Page/Home.html"><i class="fas fa-home"></i></a>
-      			<a href="#"><i class="fas fa-rss"></i></a>
+      			<a href="/Social_Media/index.html"><i class="fas fa-rss"></i></a>
       			<a href="/Realtimevideo/index.html"><i class="fas fa-video"></i></a>
-      			<a href="#"><i class="fas fa-user-md"></i></a>
+      			<a href="/doctorPatient/index.html"><i class="fas fa-user-md"></i></a>
 			</ul>
 				<form method="post" class="form-search">
-					<a href="#"><i class="fas fa-search" style="color: #f1b864; "></i></a>
-					<input type="text" class="searchtext" placeholder="Search" style="width: 120px;">
+					<a href="#"  onclick="searchPosts()"><i class="fas fa-search" style="color: #f1b864; "></i></a>
+					<input type="text" id='searchInput' class="searchtext" placeholder="Search" style="width: 120px;">
 				</form>
 			<ul class="setting-area">
 				<li>
@@ -674,6 +674,59 @@
 								<div id="posts-container" class="central-meta"></div>
 
 <script>
+	let postData = [];
+
+function searchPosts() {
+  // Get the search input value
+  const searchInputValue = $('#searchInput').val().toLowerCase();
+
+  // Filter posts based on the search input
+  const filteredPosts = postData.filter(post =>
+	post.username.toLowerCase().includes(searchInputValue) ||
+	post.description.toLowerCase().includes(searchInputValue)
+  );
+
+  // Generate HTML dynamically based on filtered data
+  const html = filteredPosts.map(post => `
+	<div class="item">
+	  <div class="user-post">
+		<div class="friend-info">
+		  <figure>
+			<img src="../Backend/uploads/${post.profilePicture}" alt="">
+		  </figure>
+		  <div class="friend-name">
+			<ins><a href="time-line.html" title="">${post.username}</a></ins>
+			<span>published: ${new Date(post.timestamp).toLocaleString()}</span>
+		  </div>
+		  <div class="post-meta">
+			<img src="../Backend/uploads/${post.media}" alt="">
+			<div class="we-video-info">
+			  <ul>
+				<li>
+				  <span class="like" data-toggle="tooltip" title="like">
+					<i class="ti-heart"></i>
+					<ins>${post.likes}</ins>
+				  </span>
+				</li>
+				<li class="social-media">
+				  <div class="menu">
+					<!-- Your social media icons -->
+				  </div>
+				</li>
+			  </ul>
+			</div>
+			<div class="description">
+			  <p>${post.description}</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  `).join('');
+
+  // Insert the generated HTML into the posts-container
+  $('#posts-container').html(html);
+}
   // Function to fetch and display posts
   function fetchAndDisplayPosts() {
     // Use AJAX to fetch data from the server-side API

@@ -38,7 +38,7 @@ const upload = multer({ storage: storage });
 
 // Signup endpoint
 app.post('/signup',upload.single('profilePicture'), async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, userType, qualifications } = req.body;
 
   try {
       // Check if user already exists
@@ -57,7 +57,7 @@ app.post('/signup',upload.single('profilePicture'), async (req, res) => {
         profile = null;
       }
       
-      const newUser = new User({ firstName, lastName, email, password, profilePicture, profile });
+      const newUser = new User({ firstName, lastName, email, password, profilePicture, profile, userType, qualifications });
 
     // Save the user to the database
     await newUser.save();
@@ -163,7 +163,7 @@ app.post('/login', async (req, res) => {
 
       const decodedToken = parseJWT(req.headers.authorization.split(' ')[1]);
       console.log('Decoded Token:', decodedToken);
-      const username = `${decodedToken.firstName}${decodedToken.lastName}`;
+      const username = `${decodedToken.firstName} ${decodedToken.lastName}`;
       console.log('Decoded username:', username);
       const user = await User.findOne({ username });
       const profilePicture = `${decodedToken.profilePicture}`;
@@ -340,6 +340,19 @@ async function authenticateMiddleware(req, res, next) {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+
+  app.get('/doctors', async (req, res) => {
+    try {
+      // Fetch users with userType "Doctor"
+      const doctors = await User.find({ userType: 'doctor' }, 'firstName lastName profilePicture qualifications email');
+  
+      res.status(200).json(doctors);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error.', error: error.message });
     }
   });
 

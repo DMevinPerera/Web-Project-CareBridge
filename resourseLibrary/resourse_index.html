@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Winku Social Network Toolkit</title>
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
+    
+    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/strip.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/responsive.css">
+	<style>
+        /* Add your custom styles here */
+        .Library {
+            margin-bottom: 20px;
+        }
+
+        .g-post-meta {
+            padding: 15px;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .post-title {
+            margin-bottom: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .read-more-link {
+            color: #007bff; /* Bootstrap primary color */
+            cursor: pointer;
+        }
+    </style>
+	<script src="library.js" defer></script>
+</head>
+<body>
+<!--<div class="se-pre-con"></div>-->
+<div class="theme-layout">
+	
+	<div class="responsive-header">
+		<div class="mh-head first Sticky">
+			<span class="mh-btns-left">
+				<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+			</span>
+			<span class="mh-text">
+				<a href="newsfeed.html" title=""><img src="images/logo2.png" alt=""></a>
+			</span>
+			<span class="mh-btns-right">
+				<a class="fa fa-sliders" href="#shoppingbag"></a>
+			</span>
+		</div>
+		<div class="mh-head second">
+			<form class="mh-form">
+				<input placeholder="search" />
+				<a href="#/" class="fa fa-search"></a>
+			</form>
+		</div>
+
+		<nav id="shoppingbag">
+			<div>
+				<div class="">
+
+					<h4 class="panel-title">Account Setting</h4>
+					
+				</div>
+			</div>
+		</nav>
+	</div><!-- responsive header -->
+	
+	<div class="topbar transparent">
+		<div class="logo">
+			<a title="" href="newsfeed.html"><img src="images/CareBridge.png" alt=""></a>
+		</div>
+		<div class="menu-container" id="toggle">
+		  <a href="#" class="canvas-menu" >
+			<i class="fa fa-times fa-bars" aria-hidden="true"></i></a>
+		</div>
+		<div class="overlay" id="overlay">
+		  <nav class="overlay-menu">
+			<ul class="offcanvas-menu">
+				<li class="menu-item-has-children">
+					<a href="/Home Page/Home.html" title="">Home</a>
+				</li>
+				<li class="menu-item-has-children">
+					<a href="/login-form-design/index.html" title="">Log in</a>
+				</li>
+				<li class="menu-item-has-children">
+					<a href="/sign up/index.html" title="">Sign up</a>
+				</li>
+				
+				
+			</ul>
+		  </nav>
+		</div>
+	</div><!-- topbar transparent header -->
+		
+	<section>
+		<div class="ext-gap bluesh high-opacity">
+			<div class="content-bg-wrap" style="background: url(images/resources/animated-bg2.png)"></div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="top-banner">
+							<h1>Our Resource Library</h1>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- top area animated -->
+	
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row" id="page-contents">
+					<div class="col-lg-3">
+						<aside class="sidebar static">
+							<div class="widget">
+								<h4 class="widget-title">Socials</h4>
+								<ul class="socials">
+									<li class="facebook">
+										<a title="" href="#"><i class="fa fa-facebook"></i> <span>facebook</span> <ins>45 likes</ins></a>
+									</li>
+									<li class="twitter">
+										<a title="" href="#"><i class="fa fa-twitter"></i> <span>twitter</span><ins>25 likes</ins></a>
+									</li>
+									<li class="google">
+										<a title="" href="#"><i class="fa fa-google"></i> <span>google</span><ins>35 likes</ins></a>
+									</li>
+								</ul>
+							</div>
+							<!-- Shortcuts -->
+						</aside>	
+					</div>
+					<div class="col-lg-9">
+						<div class="blog-sec right-pading">
+							<div class="post-filter-sec">
+								<form method="post" class="filter-form">
+									<input type="post" placeholder="Search post">
+									<button><i class="ti-search"></i></button>
+								</form>
+								<div class="purify">
+									<span>filter by</span>
+									<select>
+										<option>All categories</option>
+										<option>By Favouirtes</option>
+										<option>By Likes</option>
+									</select>
+									<select>
+										<option>Assending A-Z</option>
+										<option>Desending Z-A</option>
+										<option>Desending (date)</option>
+										<option>Asending (date)</option>
+									</select>
+									<a href="#" title="">purify</a>
+								</div>
+							</div>
+							<div class="row">
+								
+								<div class="col-lg-4 col-sm-6">
+									<div class="row" id="Library"></div>
+									<script>
+										  function stripHtmlTags(html) {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || "";
+    }
+
+    // Function to format the date
+    function formatDate(dateString) {
+        return new Date(dateString).toLocaleString();
+    }
+
+
+										const blogId = '9190905892112183495';
+										const apiKey = 'AIzaSyBSAHGIzn_IHOPwIFTtE0zbY9HSmwg1olY';
+										const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}`;
+	
+	// Function to fetch and display blog posts
+	function createReadMoreLink(post) {
+        const readMoreLink = document.createElement('a');
+        readMoreLink.href = post.url;
+        readMoreLink.innerText = 'Read More';
+        return readMoreLink;
+    }
+
+    // Function to fetch and display blog posts
+    async function fetchAndDisplayBlogPosts() {
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            console.log('Blogger API Response:', data);
+
+            // Target container
+            const container = document.getElementById('Library');
+
+            // Iterate through each blog post
+            data.items.forEach(post => {
+                // Create elements for each part of the structure
+                const postContainer = document.createElement('div');
+                postContainer.className = 'Library';
+
+                const figure = document.createElement('figure');
+
+                // Check if images are present
+                if (post.images && post.images[0]) {
+                    const img = document.createElement('img');
+                    img.alt = '';
+                    img.src = post.images[0].url;
+                    const iconClass = post.media ? 'video-camera' : 'image';
+                    const icon = document.createElement('i');
+                    icon.className = `fa fa-${iconClass}`;
+                    figure.appendChild(img);
+                    figure.appendChild(icon);
+                }
+
+                const postMeta = document.createElement('div');
+                postMeta.className = 'g-post-meta';
+
+                const postTitle = document.createElement('div');
+                postTitle.className = 'post-title';
+                const h4 = document.createElement('h4');
+                const titleLink = document.createElement('a');
+                titleLink.title = '';
+                titleLink.href = post.url;
+                titleLink.innerText = post.title;
+                h4.appendChild(titleLink);
+
+                const p = document.createElement('p');
+                const strippedContent = stripHtmlTags(post.content);
+
+                // Display only a part of the content
+                const truncatedContent = strippedContent.substring(0, 150);
+                p.innerText = truncatedContent;
+
+                // Create "Read More" link
+                const readMoreLink = createReadMoreLink(post);
+
+                // Handle "Read More" click event
+                readMoreLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    p.innerText = strippedContent;
+                    postMeta.removeChild(readMoreLink);
+                });
+
+                // Append elements to the structure
+                postContainer.appendChild(figure);
+                postContainer.appendChild(postMeta);
+                postMeta.appendChild(postTitle);
+                postTitle.appendChild(h4);
+                postTitle.appendChild(p);
+                postTitle.appendChild(readMoreLink);
+
+                // Append the post container to the target container
+                container.appendChild(postContainer);
+            });
+
+        } catch (error) {
+            console.error('Error fetching blog posts:', error);
+        }
+    }
+
+    // Call the function to fetch and display blog posts
+    fetchAndDisplayBlogPosts();
+</script>
+	
+
+								</div>
+								<button class="btn-view btn-load-more">Load More</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4">
+					<div class="widget">
+						<div class="foot-logo">
+							<div class="logo">
+								<a href="index-2.html" title=""><img src="images/CareBridge_black.png" alt=""></a>
+							</div>	
+							<p>
+								Join the worlds largest community of Cancer Patients in the World.
+							</p>
+						</div>
+						<ul class="location">
+							<li>
+								<i class="ti-map-alt"></i>
+								<p>Sabaragamuwa University of Sri Lanka</p>
+							</li>
+							<li>
+								<i class="ti-mobile"></i>
+								<p>+94 112 54687</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-4">
+					<div class="widget">
+						<div class="widget-title"><h4>follow</h4></div>
+						<ul class="list-style">
+							<li><i class="fa fa-facebook-square"></i> <a href="https://web.facebook.com/shopcircut/" title="">facebook</a></li>
+							<li><i class="fa fa-twitter-square"></i><a href="https://twitter.com/login?lang=en" title="">twitter</a></li>
+							<li><i class="fa fa-instagram"></i><a href="https://www.instagram.com/?hl=en" title="">instagram</a></li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-4">
+					<div class="widget">
+						<div class="widget-title"><h4>Navigate</h4></div>
+						<ul class="list-style">
+							<li><a href="about.html" title="">about us</a></li>
+							<li><a href="contact.html" title="">contact us</a></li>
+							<li><a href="terms.html" title="">terms & Conditions</a></li>
+						
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-4">
+				</div>
+				<div class="col-lg-2 col-md-4">
+					<div class="widget">
+						<div class="widget-title"><h4>download apps</h4></div>
+						<ul class="colla-apps">
+							<li><a href="https://play.google.com/store?hl=en" title=""><i class="fa fa-android"></i>android</a></li>
+							<li><a href="https://www.apple.com/lae/ios/app-store/" title=""><i class="ti-apple"></i>iPhone</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer><!-- footer -->
+	<div class="bottombar">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
+					<i><img src="images/credit-cards.png" alt=""></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+	
+	<script src="js/main.min.js"></script>
+	<script src="js/strip.pkgd.min.js"></script>
+	<script src="js/script.js"></script>
+
+</body>	
+
+</html>

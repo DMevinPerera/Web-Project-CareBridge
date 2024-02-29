@@ -8,7 +8,7 @@
   list-style: none; }
 
   img {
-    max-width: 100%; 
+    max-width: auto; 
     margin: 0;
     height: 100%;
   }
@@ -23,6 +23,24 @@
   .help img{
     margin: 0;
   }
+
+  .detail-box {
+    height: 920px;
+}
+
+.detailsh {
+    height: 100%;
+}
+
+.detailsh img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
 a {
   text-decoration: none;
   outline: none;
@@ -158,7 +176,15 @@ body {
   @media screen and (max-width: 991px) {
     .form-login-body {
       padding-left: 30px;
-      padding-right: 30px; } }
+      padding-right: 30px; }
+    
+      .detail-box {
+        height: 100%;
+    }
+
+
+
+    }
   @media screen and (max-width: 480px) {
     .form-login-body {
       padding-left: 15px;
@@ -176,7 +202,8 @@ body {
       .form-login-body .login-desk .detail-box .help {
         width: 100%;
         margin-top: 0px;
-        margin-bottom: 0px; }
+        margin-bottom: 0px;
+      height: 100%; }
       .form-login-body .login-desk .detail-box .detailsh {
         text-align: center; }
         .form-login-body .login-desk .detail-box .detailsh h1 {
