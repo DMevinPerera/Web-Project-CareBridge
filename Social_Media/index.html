@@ -815,6 +815,7 @@ function searchPosts() {
   }
 
   function likePost(_id) {
+	console.log("test");
     $.ajax({
       url: `http://localhost:3000/like/${_id}`,
       method: 'POST',
