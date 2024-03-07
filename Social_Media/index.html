@@ -736,6 +736,7 @@ function searchPosts() {
       method: 'GET',
       dataType: 'json',
       success: function (data) {
+		console.log(data);
         // Generate HTML dynamically based on fetched data
         const html = data.map(post => `
           <div class="item">
@@ -754,7 +755,7 @@ function searchPosts() {
 													<ul>
 											
 														<li>
-															<span class="like" data-toggle="tooltip" title="like">
+															<span class="like" data-toggle="tooltip" title="like" onclick="likePost('${post.id}')">
 																<i class="ti-heart"></i>
 																<ins>${post.likes}</ins>
 															</span>

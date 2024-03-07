@@ -262,7 +262,8 @@ app.post('/login', async (req, res) => {
   
       // Map the posts to include user profile pictures
       const postsWithProfilePictures = posts.map(post => {
-        const { likes, profilePicture, username, description, mediaType, media, timestamp } = post;
+        const { likes, profilePicture, username, description, mediaType, media, timestamp,_id } = post;
+        console.log(post);
         const userProfilePicture = username.profilePicture;
   
         return {
@@ -273,6 +274,7 @@ app.post('/login', async (req, res) => {
           mediaType,
           media,
           timestamp,
+          _id,
         };
       });
   
