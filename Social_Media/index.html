@@ -755,7 +755,7 @@ function searchPosts() {
 													<ul>
 											
 														<li>
-															<span class="like" data-toggle="tooltip" title="like" onclick="likePost('${post.id}')">
+															<span class="like" data-toggle="tooltip" title="like" onclick="likePost('${post._id}')">
 																<i class="ti-heart"></i>
 																<ins>${post.likes}</ins>
 															</span>
@@ -816,7 +816,7 @@ function searchPosts() {
   }
 
   function likePost(_id) {
-	console.log("test");
+	console.log(_id);
     $.ajax({
       url: `http://localhost:3000/like/${_id}`,
       method: 'POST',

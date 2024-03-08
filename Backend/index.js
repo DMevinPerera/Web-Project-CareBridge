@@ -258,11 +258,11 @@ app.post('/login', async (req, res) => {
   app.get('/posts', async (req, res) => {
     try {
       // Fetch posts with user information
-      const posts = await Post.find({}, { _id: 0, __v: 0 }).sort({ timestamp: -1 }).populate('username', '-_id firstName lastName profilePicture');
+      const posts = await Post.find({}, { __v: 0 }).sort({ timestamp: -1 }).populate('username', '-_id firstName lastName profilePicture');
   
       // Map the posts to include user profile pictures
       const postsWithProfilePictures = posts.map(post => {
-        const { likes, profilePicture, username, description, mediaType, media, timestamp,_id } = post;
+        const { likes, profilePicture, username, description, mediaType, media, timestamp} = post;
         console.log(post);
         const userProfilePicture = username.profilePicture;
   
@@ -274,11 +274,11 @@ app.post('/login', async (req, res) => {
           mediaType,
           media,
           timestamp,
-          _id,
+          
         };
       });
   
-      res.json(postsWithProfilePictures);
+      res.json(posts);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
