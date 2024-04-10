@@ -43,6 +43,7 @@
                                               </div>
                                               <input type="text" id="email" class="form-control" placeholder="Enter Email" aria-label="Username" aria-describedby="basic-addon1">
                                          </div>
+                                         <div id="email-error" class="text-danger"></div>
                                     </div>
                                     <div class="form-row">
                                       <label for="">Profile Name</label>
@@ -90,6 +91,7 @@
                                              </div>
                                              <input type="password" id="password1" class="form-control" placeholder="Enter Password" aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
+                                        <div id="password-error" class="text-danger" style="font-size: 12px;"></div>
                                    </div>
                                    <div class="form-row">
                                     <label for="profilePicture">Profile Picture</label>
@@ -103,6 +105,8 @@
                                     <br>
                                     
                                     <button id="signupButton" class="btn btn-sm btn-primary">Register</button>
+                                    <hr>
+                                    <p>Already Sign Up? <a href="../login-form-design/index.html" class="sign-up" style="color: darkorchid;"><b>Log In</b></a></p>
                                   
                                     
                                     
@@ -119,14 +123,82 @@
                 $(document).ready(function () {
                   $("#signupButton").click(function () {
                     // Get values from the input fields
+                    $(".text-danger").empty();
+                    $("#password-requirements").empty();
                     var firstName = $("#firstName").val();
                     var lastName = $("#lastName").val();
                     var email = $("#email").val();
                     var password = $("#password").val();
+                    var password1 = $("#password1").val();
                     var userType = $("#userType").val(); // Get user type
                     var qualifications = $("#qualifications").val(); // Get qualifications
 
-                    
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            $("#email-error").text("Please enter a valid email address.");
+            return;
+        }
+
+        // Check for common typos
+        if (email.includes("@gmial.com")) {
+            $("#email-error").text("Did you mean '@gmail.com'?");
+            return;
+        }
+
+        // Check for disposable email domains
+        var disposableDomains = ["mailinator.com", "guerrillamail.com", "dispostable.com"];
+        var domain = email.split('@')[1];
+        if (disposableDomains.includes(domain)) {
+            $("#email-error").text("Please provide a non-disposable email address.");
+            return;
+        }
+
+        // Check against known invalid email patterns
+        var invalidEmailPatterns = ["test@example.com", "invalid@example.com"]; 
+        if (invalidEmailPatterns.includes(email.toLowerCase())) {
+            $("#email-error").text("Invalid email address.");
+            return;
+        }
+                
+
+                // Validate password strength
+                var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/;
+                if (!passwordRegex.test(password)) {
+    // Display password requirements as the error message
+    var requirements = [
+        "At least 8 characters long",
+        "Contain at least one uppercase letter",
+        "Contain at least one lowercase letter",
+        "Contain at least one number",
+        "Contain at least one special character"
+    ];
+
+    var errorMessage = "Password must meet the following requirements:\n";
+    errorMessage += requirements.join("\n");
+
+    $("#password-error").text(errorMessage);
+
+    // Display password requirements as bullet points
+    var requirementsList = "<ul>";
+    requirements.forEach(function (requirement) {
+        requirementsList += "<li>" + requirement + "</li>";
+    });
+    requirementsList += "</ul>";
+
+    $("#password-requirements").html(requirementsList);
+
+    return;
+}
+
+                // Validate if passwords match
+                console.log("password:", password);
+                console.log("password1:", password1);
+                if (password.trim() !== password1.trim()) {
+                alert("Passwords do not match.");
+                return;
+                }
+
               
                     // Create a FormData object
                     var formData = new FormData();
@@ -149,20 +221,20 @@
                       contentType: false,
                       processData: false,
                       success: function (response) {
-                        // Handle successful signup
-                        console.log(response);
-                        window.location.href = "../login-form-design/index.html";
-                        // Redirect or perform other actions as needed
+                        window.location.replace("../login-form-design/index.html");;
+                       
                       },
                       error: function (error) {
-                        // Handle signup failure
+                      
                         console.error(error);
                         alert("Signup failed. Please try again.");
-                        // Display error message or perform other actions as needed
+                   
                       },
                     });
                   });
                 });
+
+
               </script>
               <script>
                 function toggleQualificationsField() {

@@ -8,6 +8,7 @@ const multer = require('multer');
 const path = require('path');
 const Post = require('./models/posts')
 const rawBody = require('raw-body');
+const bcrypt = require('bcryptjs');
 
 app.use(cors());
 
@@ -56,8 +57,9 @@ app.post('/signup',upload.single('profilePicture'), async (req, res) => {
         profilePicture = null;
         profile = null;
       }
-      
-      const newUser = new User({ firstName, lastName, email, password, profilePicture, profile, userType, qualifications });
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const newUser = new User({ firstName, lastName, email, password: hashedPassword, profilePicture, profile, userType, qualifications });
 
     // Save the user to the database
     await newUser.save();
@@ -80,7 +82,7 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ email: userEmail });
 
     // Check if the user exists and the password matches
-    if (user && user.password === password) {
+    if (user && await bcrypt.compare(password, user.password)) {
       // Do not populate in the login route, especially for sensitive information
       // Instead, only send necessary information and avoid exposing sensitive fields
       const { firstName, lastName, email, profilePicture } = user;
